@@ -2,6 +2,7 @@ package com.inditex.challengeinditex.service
 
 import com.inditex.challengeinditex.dataSource.ShirtDataSourceInterface
 import com.inditex.challengeinditex.model.Shirt
+import com.inditex.challengeinditex.repository.ShirtRepository
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -13,8 +14,8 @@ import org.mockito.kotlin.whenever
 @ExtendWith(MockitoExtension::class)
 internal class ShirtServiceTest {
 
-    private val dataSource: ShirtDataSourceInterface = mock()
-    private val service = ShirtService(dataSource)
+    private val repository: ShirtRepository = mock()
+    private val service = ShirtService(repository)
 
     private val shirtList = listOf(
         Shirt("1", "V-NECH BASIC SHIRT", 100, 4 ,9 ,0),
@@ -32,6 +33,6 @@ internal class ShirtServiceTest {
 
         val shirts = service.getShirts()
 
-        verify(dataSource).getShirts()
+        verify(repository).findAll()
     }
 }
