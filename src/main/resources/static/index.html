@@ -8,15 +8,9 @@ body
 }
 .center-div
 {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  margin: 2em auto;
   width: 75%;
   max-width: 750px;
-  height: 75vw;
   max-height: 75%;
   text-align: center;
   padding: 2em 0 2em;
@@ -49,16 +43,40 @@ input{
 margin: 1em;
 }
 
+
     </style>
     <script>
-        window.addEventListener("DOMContentLoaded", function() {
+  window.addEventListener("DOMContentLoaded", function() {
   document.getElementById('sortShirtsForm').addEventListener("submit", function(e) {
     e.preventDefault();
     var stockPoints = document.getElementsByName("stockPoints")[0].value;
-    var salesPoints = document.getElementsByName("salesPoints")[0].value
+    var salesPoints = document.getElementsByName("salesPoints")[0].value;
     window.location.href = `http://localhost:8080/api/shirts/sorted/${salesPoints}/${stockPoints}`
   })
-});
+  document.getElementById('addShirt').addEventListener("submit", function(e) {
+    e.preventDefault();
+    var shirtName = document.getElementsByName('shirtName')[0].value;
+    fetch('http://localhost:8080/api/shirts', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: shirtName
+       })
+    window.location.href = `http://localhost:8080`
+
+    })
+      document.getElementById('deleteShirt').addEventListener("submit", function(e) {
+        e.preventDefault();
+        var shirtId = document.getElementById('shirtId').value
+          fetch('/api/shirts/delete/' + shirtId,  {
+            method: 'DELETE'
+          })
+        window.location.href = `http://localhost:8080`
+      })
+  });
+
     </script>
 </head>
 <body>
@@ -67,8 +85,7 @@ margin: 1em;
 <div class="center-div">
     <h1>INDITEX SHIRT COLLECTION</h1>
     <br><br>
-    <br><br>
-    <a class="btn" href="api/shirts">Get all shirts</a>
+    <a class="btn" href="api/shirts">ALL SHIRTS</a>
     <br><br>
     <hr>
     <br><br>
@@ -79,6 +96,23 @@ margin: 1em;
         <input type="number" id="stockPoints" name="stockPoints" value="1" placeholder="1"><br>
         <input type="submit" class="btn" value="GET SHIRTS SORTED">
     </form>
+    <br><br>
+    <hr>
+    <br><br>
+    <form id="addShirt">
+        <label for="shirtName">Shirt name:</label><br>
+        <input type="text" id="shirtName" name="shirtName"><br><br>
+        <input type="submit" class="btn" value="ADD SHIRT">
+    </form>
+    <br><br>
+    <hr>
+    <br><br>
+    <form id="deleteShirt">
+        <label for="shirtId">Shirt Id:</label><br>
+        <input type="text" id="shirtId" name="shirtId"><br><br>
+        <input type="submit" class="btn" value="DELETE SHIRT">
+    </form>
+    <br><br>
 </div>
 
 

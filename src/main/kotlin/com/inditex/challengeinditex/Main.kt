@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import kotlinx.serialization.json.Json
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -16,12 +15,6 @@ class ChallengeInditexApplication
 
 fun main(args: Array<String>) {
     runApplication<ChallengeInditexApplication>(*args)
-}
-
-@Configuration
-class KotlinSerializationConfiguration {
-    @Bean
-    fun json() = Json
 }
 
 @Configuration
@@ -51,8 +44,6 @@ class InitDataConfiguration {
             Shirt("5", "CONTRASTING LACE T-SHIRT", 650, 0, 1, 0),
             Shirt("6", "SLOGAN T-SHIRT", 20, 9, 2, 5),
         )
-        for (shirt in shirts) {
-            repository.save(shirt)
-        }
+        repository.insert(shirts)
     }
 }

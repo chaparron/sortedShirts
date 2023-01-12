@@ -3,20 +3,26 @@ package com.inditex.challengeinditex.controller
 import com.inditex.challengeinditex.model.Shirt
 import com.inditex.challengeinditex.service.ShirtService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api/shirts")
 class ShirtController (
-    private val shirtService: ShirtService
+    private val service: ShirtService
 ) {
     @GetMapping
-    fun getShirts(): List<Shirt> = shirtService.getShirts()
+    fun getShirts(): List<Shirt> = service.getShirts()
 
     @GetMapping("/sorted/{salesPoints}/{stockPoints}")
     fun sortedShirts(@PathVariable salesPoints: Int, @PathVariable stockPoints: Int): List<Shirt> =
-        shirtService.sortedShirts(salesPoints, stockPoints)
+        service.sortedShirts(salesPoints, stockPoints)
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    fun addShirt(@RequestBody shirtName: String): Shirt = service.saveShirt(shirtName)
+
+    @DeleteMapping("/delete/{shirtId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteBank(@PathVariable shirtId: String): Unit = service.deleteShirt(shirtId)
 }
