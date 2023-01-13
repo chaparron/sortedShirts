@@ -24,5 +24,5 @@ class ShirtController (
 
     @DeleteMapping("/delete/{shirtId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteBank(@PathVariable shirtId: String): Unit = service.deleteShirt(shirtId)
+    fun deleteShirt(@PathVariable shirtId: String): Unit = service.deleteShirt(shirtId)
 }

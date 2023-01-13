@@ -26,16 +26,12 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation ("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation ("io.projectreactor.kotlin:reactor-kotlin-extensions")
-	implementation ("org.jetbrains.kotlin:kotlin-reflect")
-	implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-	implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
-	testImplementation ("org.springframework.boot:spring-boot-starter-test")
-	testImplementation ("io.projectreactor:reactor-test")
-	testImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
-	testImplementation ("org.mockito:mockito-junit-jupiter:4.0.0")
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("io.springfox:springfox-boot-starter:3.0.0")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 }
 
 tasks.withType<KotlinCompile> {
